@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ResumeScreener AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .button-hover-glow {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .button-hover-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.7);
+        }
+        .slide-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .glassmorphism {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        // Login Form Validation and Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Basic validation
+                if (!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                // Email validation
+                if (!isValidEmail(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                // Here you would typically make an API call to your backend
+                // For demo, we'll simulate a successful login
+                window.location.href = '/dashboard';
+            });
+            
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+            
+            function showError(message) {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.textContent = message;
+                errorDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    errorDiv.classList.add('hidden');
+                }, 3000);
+            }
+        });
+    </script>
+</head>
+<body class="bg-slate-900 font-sans antialiased text-white min-h-screen flex flex-col items-center justify-center">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-semibold text-center mb-8 bg-gradient-to-r from-cyan-400 to-teal-500 text-transparent bg-clip-text slide-fade-in">
+            ResumeScreener AI — Smarter Hiring Starts Here
+        </h1>
+        
+        <div class="flex justify-center">
+            <div class="w-full max-w-md glassmorphism p-8 rounded-xl shadow-lg slide-fade-in">
+                <h2 class="text-2xl font-semibold text-center mb-6 text-white">Login / Register</h2>
+                
+                <div id="error-message" class="hidden bg-red-500 text-white p-3 rounded mb-4 text-center"></div>
+                
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-800">
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-gray-300 text-sm font-bold mb-2">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-800">
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <label for="remember" class="flex items-center">
+                            <input type="checkbox" id="remember" class="mr-2 h-4 w-4 rounded border-gray-700 text-cyan-500 focus:ring-cyan-500">
+                            <span class="text-gray-300 text-sm">Remember me</span>
+                        </label>
+                        <a href="#" class="text-cyan-400 text-sm hover:text-cyan-300">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline w-full button-hover-glow">
+                        Login
+                    </button>
+                    
+                    <div class="text-center mt-4">
+                        <span class="text-gray-400">Don't have an account?</span>
+                        <a href="/register" class="text-cyan-400 hover:text-cyan-300 ml-1">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="mt-8 text-gray-400 text-center">
+        <p>© 2024 ResumeScreener AI. All rights reserved.</p>
+    </footer>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
